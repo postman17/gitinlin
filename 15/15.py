@@ -11,8 +11,6 @@ class Field:
         return field
 
     def show_field(self):
-        start = 0
-        end = 0
         print('|-----------------|')
         for line_start in range(0,self.number_of_chips + 1,4):
             line_end = line_start + 4
