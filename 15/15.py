@@ -50,7 +50,7 @@ class Game:
                 self.game_of.move(key)
             else:
                 print('Введены неверные данные')        
-            if self.game_of.field == win_list:
+            if tuple(self.game_of.field) == win_list:
                 print('Вы выиграли!')
                 break
 
