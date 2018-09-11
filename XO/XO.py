@@ -5,17 +5,17 @@ class Field:
         self.field = self._generate_field()
 
     def _generate_field(self):
-        field = ['-' for _ in range(1,10)]
+        field = ['-' for _ in range(1, 10)]
         return field
 
-    def field_translation(self, key, to_do = False):
+    def field_translation(self, key, to_do=False):
         dictionary = {'a1': 6, 'b1': 7, 'c1': 8, 'a2': 3, 'b2': 4, 'c2': 5, 'a3': 0, 'b3': 1, 'c3': 2}
-        if to_do == False:
+        if to_do is False:
             if key in dictionary:
                 return dictionary[key]
             else:
                 return 'False'
-        elif to_do == True:
+        elif to_do is True:
             for k, v in dictionary.items():
                 if v == key:
                     return k
@@ -40,7 +40,7 @@ class Field:
 class Game(Field):
     def __init__(self):
         super().__init__()
-        self.game()
+        self.game(self.input_move())
 
     def move_selection(self):
         lst = []
@@ -51,7 +51,7 @@ class Game(Field):
         return key[0]
 
     def win(self):
-        win_list = [[0, 1, 2], [2, 5, 8], [6, 7, 8], [0, 3, 6], [1, 4, 7], [0, 4, 8], [2, 4, 6]]
+        win_list = [[0, 1, 2], [2, 5, 8], [6, 7, 8], [0, 3, 6], [1, 4, 7], [0, 4, 8], [2, 4, 6], [3, 4, 5]]
         player_list = []
         computer_list = []
         for index, value in enumerate(self.field):
@@ -78,16 +78,16 @@ class Game(Field):
                 print('Победил компьютер!')
                 return True
 
-    def game(self):
+    def input_move(self):
         while True:
             print('1 - Игрок')
             print('2 - Компьютер')
             move = input('Введите кто ходит первый (1 или 2): ')
             if move == '1' or move == '2':
-                break
-            else:
-                print('Вы можете ввести только 1 или 2')
-                continue
+                return move
+            print('Вы можете ввести только 1 или 2')
+
+    def game(self, move):
         while True:
             if move == '1':
                 self.show_field()
@@ -96,19 +96,19 @@ class Game(Field):
                 if row == 'False':
                     print('Введены неверные данные')
                     continue
-                if self.make_a_move(row, 'X') == False:
+                if self.make_a_move(row, 'X') is False:
                     continue
-                if self.win() == True:
+                if self.win() is True:
                     self.show_field()
                     break
                 self.show_field()
                 self.make_a_move(self.move_selection(), 'O')
-                if self.win() == True:
+                if self.win() is True:
                     self.show_field()
                     break
             elif move == '2':
                 self.make_a_move(self.move_selection(), 'O')
-                if self.win() == True:
+                if self.win() is True:
                     self.show_field()
                     break
                 self.show_field()
@@ -117,12 +117,11 @@ class Game(Field):
                 if row == 'False':
                     print('Введены неверные данные')
                     continue
-                if self.make_a_move(row, 'X') == False:
+                if self.make_a_move(row, 'X') is False:
                     continue
-                if self.win() == True:
+                if self.win() is True:
                     self.show_field()
                     break
                 self.show_field()
 
 asd = Game()
-
